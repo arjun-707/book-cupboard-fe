@@ -25,20 +25,24 @@ export default class HackerNews extends Component {
     console.log('render ==> ', this.state.wait)
     let html = (this.state.wait) ? <div>fetching...</div> : <div></div>
     if (this.state.storiesResult.length) {
+      let keys = Object.keys(this.state.storiesResult[0].data)
+      const index = keys.indexOf('kids');
+      if (index > -1) {
+        keys.splice(index, 1);
+      }
       const headingItems = _ => {
-        const keys = Object.keys(this.state.storiesResult[0].data)
         return keys.map((item, i) => <th key={i}>{item}</th>)
       }
       const bodyItems = _ => {
-        return this.state.storiesResult.map((item, i) =>
-          <tr key={i}>
-            <td>{item.data['by']}</td>
-            <td>{item.data['descendants']}</td>
-            <td>{item.data['score']}</td>
-            <td>{item.data['text']}</td>
-            <td>{item.data['title']}</td>
-            <td>{item.data['type']}</td>
-          </tr>
+        return this.state.storiesResult.map((item, i) => {
+          let trow = []
+          for (let k in item.data) {
+            if (keys.indexOf(k) > -1) {
+              trow.push(<td>{item.data[k]}</td>)
+            }
+          }
+          return <tr key={i}>{trow}</tr>
+        }
         )
       }
       html = <table className="storiesTable"><thead><tr>{headingItems()}</tr></thead><tbody>{bodyItems()}</tbody></table>
