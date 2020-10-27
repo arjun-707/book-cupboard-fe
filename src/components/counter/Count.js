@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ChildCount from './ChildCount'
+import Button from '@material-ui/core/Button';
 
 export default class Count extends Component {
   constructor() {
@@ -23,8 +24,12 @@ export default class Count extends Component {
       <div className="counter-section">
         <div className="parent-counter">
           <label>Parent</label>
-          <button onClick={this.increment}>Increment</button>
-          <button onClick={this.decrement}>Decrement</button>
+          <Button variant="contained" color="primary" onClick={this.increment}>
+            Increment
+          </Button>
+          <Button variant="contained" color="primary" onClick={this.decrement}>
+            Decrement
+          </Button>
         </div>
         <div className="count">
           {this.state.count}

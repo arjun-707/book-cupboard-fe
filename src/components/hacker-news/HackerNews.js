@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
 
 export default class HackerNews extends Component {
   constructor() {
@@ -50,8 +51,12 @@ export default class HackerNews extends Component {
     return (
       <div className="counter-section">
         <div className="story-buttons">
-          <button onClick={this.topStories}>Show Top Stories</button>
-          <button onClick={this.askStories}>Show Ask Stories</button>
+          <Button variant="contained" color="primary" onClick={this.topStories}>
+            Show Top Stories
+          </Button>
+          <Button variant="contained" color="primary" onClick={this.askStories}>
+            Show Ask Stories
+          </Button>
         </div>
         <div className="story-contents">
           {html}

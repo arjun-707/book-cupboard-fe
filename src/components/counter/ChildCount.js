@@ -1,12 +1,16 @@
 import React from 'react'
-
+import Button from '@material-ui/core/Button';
 
 function ChildCount({ increment, decrement }) {
   return (
     <div className="parent-counter">
       <label>Child</label>
-      <button onClick={increment}>Child Increment</button>
-      <button onClick={decrement}>Child Decrement</button>
+      <Button variant="contained" color="primary" onClick={increment}>
+        Increment
+      </Button>
+      <Button variant="contained" color="primary" onClick={decrement}>
+        Decrement
+      </Button>
     </div>
   );
 }
