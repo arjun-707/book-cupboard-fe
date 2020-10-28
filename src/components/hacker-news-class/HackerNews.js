@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
-export default class HackerNews extends Component {
+export default class HackerNewsClass extends Component {
   constructor() {
     console.log('constructor ==> ')
     super()
@@ -24,7 +26,7 @@ export default class HackerNews extends Component {
   }
   render() {
     console.log('render ==> ', this.state.wait)
-    let html = (this.state.wait) ? <div>fetching...</div> : <div></div>
+    let html = (this.state.wait) ? <CircularProgress /> : <div></div>
     if (this.state.storiesResult.length) {
       let keys = Object.keys(this.state.storiesResult[0].data)
       const index = keys.indexOf('kids');
@@ -35,11 +37,12 @@ export default class HackerNews extends Component {
         return keys.map((item, i) => <th key={i}>{item}</th>)
       }
       const bodyItems = _ => {
+        let tdCounter = 0
         return this.state.storiesResult.map((item, i) => {
           let trow = []
           for (let k in item.data) {
             if (keys.indexOf(k) > -1) {
-              trow.push(<td>{item.data[k]}</td>)
+              trow.push(<td key={`${++tdCounter}_${item.data.id}`}>{item.data[k]}</td>)
             }
           }
           return <tr key={i}>{trow}</tr>
@@ -50,6 +53,7 @@ export default class HackerNews extends Component {
     }
     return (
       <div className="counter-section">
+        <h3>Hacker News Class Component</h3>
         <div className="story-buttons">
           <Button variant="contained" color="primary" onClick={this.topStories}>
             Show Top Stories
@@ -57,6 +61,9 @@ export default class HackerNews extends Component {
           <Button variant="contained" color="primary" onClick={this.askStories}>
             Show Ask Stories
           </Button>
+          <span>
+            <RefreshIcon onClick={() => this.setState({ wait: false, storiesResult: [] })}/>
+          </span>
         </div>
         <div className="story-contents">
           {html}

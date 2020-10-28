@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.scss';
 import Count from './components/counter/Count';
-import HackerNews from './components/hacker-news/HackerNews';
+import HackerNewsClass from './components/hacker-news-class/HackerNews';
+import HackerNewsFunction from './components/hacker-news-function/HackerNews';
 
 function App() {
   return (
     <div className="App">
       <Count />
       <hr />
-      <HackerNews />
+      <HackerNewsClass />
+      <hr />
+      <HackerNewsFunction />
     </div>
   );
 }
